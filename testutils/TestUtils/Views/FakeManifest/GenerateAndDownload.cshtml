@@ -1,0 +1,15 @@
+﻿@using TestUtils.Models.Manifest
+@model FakeManifest
+
+@{
+    ViewData["Title"] = "Fake Manifest Generator";
+}
+
+<script type="text/javascript">
+    window.onload = function () {
+        document.getElementById('download-link').click();
+    };
+</script>
+<a id="download-link" href="@Url.Action("Download", Model)"></a>
+
+<pre id="manifest-content">@Model</pre>

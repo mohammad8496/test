@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  testutils:
+    image: testutils
+    build:
+      context: ./TestUtils
+      dockerfile: Dockerfile

@@ -1,0 +1,79 @@
+﻿@using TestUtils.Models
+@model UploadedFile
+
+@{
+    ViewData["Title"] = "File Content";
+}
+
+<form asp-action="ShowFileContent" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <h4>Upload A File</h4>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="File" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model != null && Model.File != null)
+{
+    <hr />
+    <h2>File Details:</h2>
+    <div>
+        <h3>
+            @Html.DisplayNameFor(model => model.Name)
+        </h3>
+        <div id="file-name">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+        <br />
+        <h3>
+            @Html.DisplayNameFor(model => model.IsZip)
+        </h3>
+        <div id="is-zip">
+            @Html.DisplayFor(model => model.IsZip)
+        </div>
+        <br />
+        @if (!Model.IsZip)
+        {
+            <h3>
+                @Html.DisplayNameFor(model => model.Content)
+            </h3>
+            <div>
+                <pre id="file-content">@Html.DisplayFor(model => model.Content)</pre>
+            </div>
+        }
+        else
+        {
+            <h2 id="zip-contents-header">Zip Contents (@Model.ZipContent.Count Items): </h2>
+            @for (var i = 1; i <= Model.ZipContent.Count; i++)
+            {
+                var current = Model.ZipContent.ElementAt(i - 1);
+                <h3>
+                    Item @i @Html.DisplayNameFor(model => model.Name)
+                </h3>
+                <div id="zip-file-name-@i">
+                    @Html.DisplayFor(model => current.Key)
+                </div>
+
+                <h3>
+                    Item @i @Html.DisplayNameFor(model => model.Content)
+                </h3>
+                <div>
+                    <pre id="zip-file-content-@i">@Html.DisplayFor(model => current.Value)</pre>
+                </div>
+                <br />
+            }
+        }
+    </div>
+}
+

@@ -1,0 +1,8 @@
+﻿{
+    "branch": "refs/remotes/origin/master",
+    "build_date": "2017-03-28 18:12:20 +0430",
+    "build_number": "18",
+    "ci_state": "de5c4bdd21c7743efbc914c536e00dde48eda6e4",
+    "commit_hash": "a5166e5f1a5c6e126303110b39b754dba47a29be",
+    "version": "master-18"
+}
